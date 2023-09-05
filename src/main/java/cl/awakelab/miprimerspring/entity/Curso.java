@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Curso")
+@Table(name = "curso")
 public class Curso {
 
     @Id
@@ -31,9 +31,9 @@ public class Curso {
     @Column(length = 30)
     private String instructor;
 
-    @ManyToMany(mappedBy = "listaCursos")
-    private List<Profesor> listaProfesores;
+    @ManyToMany(mappedBy = "listarCursos")
+    private List<Profesor> listarProfesores;
 
-    @OneToMany(MappedBy ="CursoAsignado")
-    private  List<Alumno> listaAlumnos;
+    @OneToMany(mappedBy ="cursoAsignado")
+    private  List<Alumno> listarAlumnos;
 }

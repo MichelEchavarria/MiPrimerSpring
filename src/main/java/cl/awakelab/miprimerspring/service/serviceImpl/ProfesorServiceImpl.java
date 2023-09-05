@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("profesorServiceImpl")
 public class ProfesorServiceImpl implements IProfesorService {
 
     private final IProfesorRepository profesorRepository;

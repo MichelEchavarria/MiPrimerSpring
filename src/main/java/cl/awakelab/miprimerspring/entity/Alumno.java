@@ -5,14 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.nio.MappedByteBuffer;
-import java.util.List;
+import javax.net.ssl.SSLSession;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Alumno")
+@Table(name = "alumnos")
 public class Alumno {
 
     @Id

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("alumnoServiceImpl")
 public class AlumnoServiceImpl implements IAlumnoService {
     @Autowired
     IAlumnoRepository objAlumnoRepo;

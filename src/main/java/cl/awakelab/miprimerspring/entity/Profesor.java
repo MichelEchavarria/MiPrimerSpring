@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import
+import java.util.List;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Profesor")
+@Table(name = "profesores")
 public class Profesor {
 
     @Id
@@ -33,6 +35,5 @@ public class Profesor {
     @JoinTable(name = "Curso_Profesor",
             joinColumns = @JoinColumn(name = "FK_Profesor", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "FK_Curso", nullable = false))
-    private List<Curso> listaCursos;
-
+    private List<Curso> listarCursos;
 }
