@@ -1,39 +1,31 @@
 package cl.awakelab.miprimerspring.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "curso")
+@Table(name = "cursos")
 public class Curso {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(unique = true, nullable = false, length = 50)
-    private String nombre;
-
     @Column(length = 100)
-    private String descripcion;
+    private String nombre_curso;
 
-    @Column(nullable = false)
-    private int duracionHoras;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "listaCursos")
+    private List<Profesor> listaProfesores;
 
-    @Column(length = 30)
-    private String instructor;
-
-    @ManyToMany(mappedBy = "listarCursos")
-    private List<Profesor> listarProfesores;
-
-    @OneToMany(mappedBy ="cursoAsignado")
-    private  List<Alumno> listarAlumnos;
+    @JsonIgnore
+    @OneToMany(mappedBy = "cursoAsignado")
+    private List<Alumno> ListaAlumno;
 }

@@ -1,18 +1,18 @@
 package cl.awakelab.miprimerspring.service;
-
 import cl.awakelab.miprimerspring.entity.Usuario;
 import java.util.List;
 
 public interface IUsuarioService {
 
-    List<Usuario> listarUsuarios();
+    public Usuario crearUsuario(Usuario crearUsuario);
 
-    Usuario listarUsuarioId(int id);
+    public Usuario actualizarUsuario(int id, Usuario usuarioActualizado);
 
-    public Usuario crearUsuario(Usuario usuario);
+    public List<Usuario> listarUsuario();
 
-    public Usuario actualizarUsuario(int id, Usuario usuario);
 
-    void borrarUsuario(int id);
+    public void eliminarUsuario(int usuario);
+    public void eliminarUsuario2(Usuario usuario);
+
+    public Usuario listaUsuarioId(int idUsuario);
 }
-

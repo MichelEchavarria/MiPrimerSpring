@@ -1,51 +1,58 @@
 package cl.awakelab.miprimerspring.service.serviceImpl;
 
 import cl.awakelab.miprimerspring.entity.Curso;
+import cl.awakelab.miprimerspring.entity.Profesor;
 import cl.awakelab.miprimerspring.repository.ICursoRepository;
+import cl.awakelab.miprimerspring.repository.IProfesorRepository;
 import cl.awakelab.miprimerspring.service.ICursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("cursoServiceImpl")
 public class CursoServiceImpl implements ICursoService {
-
     @Autowired
     ICursoRepository objCursoRepo;
+    IProfesorRepository objProfesorRepo;
 
-    @Autowired
-    public CursoServiceImpl(ICursoRepository cursoRepository) {
-        this.objCursoRepo = cursoRepository;
+    @Override
+    public List<Curso> listarCurso() {
+        List<Curso> listarCurso = new ArrayList<Curso>();
+        listarCurso = objCursoRepo.findAll();
+        return listarCurso;
     }
 
     @Override
-    public List<Curso> listarCursos() {
-        return objCursoRepo.findAll();
+    public Curso crearCurso(Curso cursoCreador) {
+        return objCursoRepo.save(cursoCreador);
     }
 
     @Override
-    public Curso listarCursoId(int id) {
-        return objCursoRepo.findById(id).orElse(null);
+    public Curso actualizarCurso(int id, Curso cursoActualizado) {
+        Curso cursoEncontrado = objCursoRepo.findById(id).orElse(null);
+        cursoEncontrado.setNombre_curso(cursoActualizado.getNombre_curso());
+        return objCursoRepo.save(cursoEncontrado);
     }
 
     @Override
-    public Curso crearCurso(Curso curso) {
+    public Curso asignarProfesorACurso(Curso cursoRecibido, Profesor profesorRecibido){
+        Curso curso = objCursoRepo.findById(cursoRecibido.getId()).orElse(null);
+        Profesor profesor = objProfesorRepo.findById(profesorRecibido.getId()).orElse(null);
+        List<Profesor> listaProfesorAsignar = new ArrayList<>();
+        listaProfesorAsignar.add(profesor);
+        curso.setListaProfesores(listaProfesorAsignar);
         return objCursoRepo.save(curso);
     }
 
     @Override
-    public Curso actualizarCurso(int id, Curso curso) {
-        if (objCursoRepo.existsById(id)) {
-            curso.setId(id);
-            objCursoRepo.save(curso);
-        }
-        return curso;
+    public void eliminarCurso(int id) {
+        objCursoRepo.deleteById(id);
     }
 
     @Override
-    public void borrarCurso(int id) {
-        objCursoRepo.deleteById(id);
+    public Curso listaCursoId(int idCurso) {
+        return objCursoRepo.findById(idCurso).orElse(null);
     }
 }
-
